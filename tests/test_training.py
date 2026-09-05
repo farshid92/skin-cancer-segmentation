@@ -53,6 +53,7 @@ def test_trainer_logs_metrics_and_saves_best_checkpoint(tmp_path: Path) -> None:
         2,
         False,
         1.0,
+        1,
     )
 
     trainer.fit(loader, loader, epochs=2)

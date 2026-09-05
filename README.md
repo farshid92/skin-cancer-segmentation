@@ -35,6 +35,15 @@ Install the research stack when the baseline implementation is ready:
 python -m pip install -e ".[research,evolution,mlops]"
 ```
 
+Run a two-batch GPU smoke test before starting a full experiment:
+
+```powershell
+python scripts/train.py --config configs/base.yaml configs/smoke.yaml
+```
+
+Local development tracks runs in SQLite under `experiments/`; Docker deployment
+uses the project PostgreSQL MLflow backend.
+
 ## Reproducibility Principles
 
 - Configuration is loaded from `configs/`; paths and experiment settings are not

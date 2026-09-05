@@ -5,7 +5,7 @@ project:
   experiment_name: skin-cancer-segmentation
 
 mlflow:
-  tracking_uri: file:experiments/mlruns
+  tracking_uri: sqlite:///experiments/mlflow.db
 
 data:
   root: data/processed
@@ -25,6 +25,7 @@ training:
   gradient_clip_norm: 1.0
   early_stopping_patience: 20
   amp: true
+  max_batches_per_epoch: null
   checkpoint_path: experiments/checkpoints/best_model.pt
 
 model:

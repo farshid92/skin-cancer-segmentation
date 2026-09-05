@@ -36,6 +36,7 @@ class Trainer:
         patience: int,
         amp_enabled: bool,
         gradient_clip_norm: float,
+        max_batches_per_epoch: int | None = None,
     ) -> None:
         self.model = model.to(device)
         self.optimizer = optimizer
@@ -46,6 +47,7 @@ class Trainer:
         self.device = device
         self.stopper = EarlyStopping(patience)
         self.gradient_clip_norm = gradient_clip_norm
+        self.max_batches_per_epoch = max_batches_per_epoch
         self.scaler = torch.amp.GradScaler(
             "cuda", enabled=amp_enabled and device.type == "cuda"
         )
@@ -79,10 +81,16 @@ class Trainer:
         self.model.train(training)
         totals = torch.zeros(3, device=self.device)
         with torch.set_grad_enabled(training):
-            for batch in loader:
+            for batch_index, batch in enumerate(loader):
                 loss, dice, iou = self._step(batch, training)
                 totals += torch.tensor([loss, dice, iou], device=self.device)
-        averages = (totals / len(loader)).tolist()
+                if (
+                    self.max_batches_per_epoch
+                    and batch_index + 1 >= self.max_batches_per_epoch
+                ):
+                    break
+        batch_count = min(len(loader), self.max_batches_per_epoch or len(loader))
+        averages = (totals / batch_count).tolist()
         return (
             cast(float, averages[0]),
             cast(float, averages[1]),

@@ -1,0 +1,17 @@
+data:
+  image_size: 64
+  batch_size: 2
+  num_workers: 0
+  remove_hair: false
+
+training:
+  epochs: 1
+  warmup_epochs: 0
+  early_stopping_patience: 1
+  max_batches_per_epoch: 2
+  checkpoint_path: experiments/checkpoints/smoke_model.pt
+
+model:
+  encoder: resnet18
+  encoder_weights: null
+  decoder_channels_scale: 16

@@ -93,6 +93,7 @@ def _train(config: Any, client: MlflowClient, run_id: str) -> None:
         training.early_stopping_patience,
         training.amp,
         training.gradient_clip_norm,
+        training.get("max_batches_per_epoch"),
     )
     loaders = build_loaders(config)
     best_dice = trainer.fit(loaders["train"], loaders["val"], training.epochs)

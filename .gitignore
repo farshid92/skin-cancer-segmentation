@@ -19,6 +19,7 @@ experiments/*.parquet
 experiments/runs/
 experiments/mlruns/
 experiments/configs/
+experiments/*.db
 mlruns/
 
 # Model and notebook outputs.
