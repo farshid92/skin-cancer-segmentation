@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.env
+
+# Local and downloaded data are intentionally never committed.
+data/raw/
+data/processed/*
+!data/processed/splits.json
+data/masks/
+data/synthetic/
+experiments/*.parquet
+experiments/runs/
+mlruns/
+
+# Model and notebook outputs.
+*.pt
+*.pth
+*.onnx
+notebooks/.ipynb_checkpoints/
