@@ -95,9 +95,7 @@ def _train(config: Any, client: MlflowClient, run_id: str) -> None:
         training.gradient_clip_norm,
     )
     loaders = build_loaders(config)
-    best_dice = trainer.fit(
-        loaders["train"], loaders["val"], training.epochs
-    )
+    best_dice = trainer.fit(loaders["train"], loaders["val"], training.epochs)
     get_logger(__name__).info(
         "Training complete on %s; best validation Dice: %.4f", device, best_dice
     )
