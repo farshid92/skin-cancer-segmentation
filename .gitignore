@@ -17,6 +17,8 @@ data/masks/
 data/synthetic/
 experiments/*.parquet
 experiments/runs/
+experiments/mlruns/
+experiments/configs/
 mlruns/
 
 # Model and notebook outputs.
